@@ -5,13 +5,9 @@
 #include "grid.h"
 #include "prod.h"
 #include "setup.h"
+#include "timer.h"
 #include "types.h"
 
-
-static inline double get_time(double start)
-{
-  return MPI_Wtime() - start;
-}
 
 // parameters defined in setup.h
 

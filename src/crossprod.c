@@ -24,7 +24,7 @@ int main()
   
   t0 = get_time(0);
   dmat_init(&x, m, n, mb, nb, &g);
-  dmat_fill_rand(&x);
+  dmat_fill_rand(&x, SEED);
   double t_gen = get_time(t0);
   
   t0 = get_time(0);

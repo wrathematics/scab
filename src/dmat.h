@@ -2,13 +2,8 @@
 #define DMAT_H
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <time.h>
-#include <unistd.h>
-
 #include "errors.h"
+#include "rand.h"
 #include "types.h"
 
 
@@ -73,17 +68,18 @@ static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t *g)
 
 
 
-static inline void dmat_fill_rand(dmat_t *x)
+static inline void dmat_fill_rand(dmat_t *x, int seed)
 {
   #define DATA(x) (x->data)
   #define LOCM(x) (x->m_local)
   #define LOCN(x) (x->n_local)
   
-  srandom(time(NULL) ^ getpid());
+  rand_init(seed);
+  
   for (int j=0; j<LOCN(x); j++)
   {
     for (int i=0; i<LOCM(x); i++)
-      DATA(x)[i + LOCM(x)*j] = ((double) random() / ((double) RAND_MAX+1));
+      DATA(x)[i + LOCM(x)*j] = rand_unif(0, 1);
   }
   
   #undef DATA

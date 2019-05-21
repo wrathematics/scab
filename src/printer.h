@@ -8,14 +8,14 @@
 #include "types.h"
 
 
-void MPI_print(grid_t *g, const char *fmt, ...)
+static inline void MPI_print(grid_t *g, const char *fmt, ...)
 {
   if (g->myrow == 0 && g->mycol == 0)
   {
     va_list args;
     
     va_start(args, fmt);
-    vfprintf(stderr, fmt, args);
+    vfprintf(stdout, fmt, args);
     va_end(args);
   }
 }

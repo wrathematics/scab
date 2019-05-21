@@ -45,7 +45,7 @@ static inline int numroc(int n, int nb, int iproc, int isrcproc, int nprocs)
 
 
 
-static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t g)
+static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t *g)
 {
   #define DATA(x) (x->data)
   #define LOCM(x) (x->m_local)
@@ -54,8 +54,8 @@ static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t g)
   x->m = m;
   x->n = n;
   
-  LOCM(x) = numroc(m, mb, g.myrow, 0, g.nprow);
-  LOCN(x) = numroc(n, nb, g.myrow, 0, g.npcol);
+  LOCM(x) = numroc(m, mb, g->myrow, 0, g->nprow);
+  LOCN(x) = numroc(n, nb, g->myrow, 0, g->npcol);
   
   descinit(x->desc, g.ictxt, m, n, mb, nb, x->m_local);
   DATA(x) = malloc(LOCM(x)*LOCN(x) * sizeof(*DATA(x)));

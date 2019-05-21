@@ -56,6 +56,7 @@ static inline void grid_init(grid_t *g, int gridtype)
   }
   
   Cblacs_gridinfo(g->ictxt, &(g->nprow), &(g->npcol), &(g->myrow), &(g->mycol));
+  g->size = size;
 }
 
 

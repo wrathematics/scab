@@ -4,6 +4,7 @@
 
 typedef struct grid_t
 {
+  int size;
   int ictxt;
   int nprow;
   int npcol;
@@ -23,6 +24,7 @@ typedef struct dmat_t
   int nb;
   double *data;
   int desc[9];
+  grid_t *g;
 } dmat_t;
 
 

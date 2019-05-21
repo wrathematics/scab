@@ -65,6 +65,19 @@ static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t g)
     exit(-1);
   }
   
+  #undef DATA
+  #undef LOCM
+  #undef LOCN
+}
+
+
+
+static inline void dmat_fill_rand(dmat_t *x)
+{
+  #define DATA(x) (x->data)
+  #define LOCM(x) (x->m_local)
+  #define LOCN(x) (x->n_local)
+  
   srandom(time(NULL) ^ getpid());
   for (int j=0; j<LOCN(x); j++)
   {

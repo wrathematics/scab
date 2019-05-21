@@ -23,10 +23,11 @@ int main()
   
   t0 = get_time(0);
   dmat_init(&x, m, n, mb, nb, g);
+  dmat_fill_rand(&x);
   double t_gen = get_time(t0);
-  dmat_init(&c, n, n, mb, nb, g);
   
   t0 = get_time(0);
+  dmat_init(&c, n, n, mb, nb, g);
   crossprod(1.0, &x, &c);
   double t_op = get_time(t0);
   

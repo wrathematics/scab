@@ -68,6 +68,13 @@ static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t *g)
 
 
 
+static inline void dmat_free(dmat_t *x)
+{
+  free(x->data);
+}
+
+
+
 static inline void dmat_fill_rand(dmat_t *x, int seed)
 {
   #define DATA(x) (x->data)
@@ -111,13 +118,6 @@ static inline void dmat_copy(dmat_t *x, dmat_t *y)
   #undef DATA
   #undef LOCM
   #undef LOCN
-}
-
-
-
-static inline void dmat_free(dmat_t *x)
-{
-  free(x->data);
 }
 
 

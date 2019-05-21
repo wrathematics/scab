@@ -8,6 +8,7 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "errors.h"
 #include "types.h"
 
 
@@ -61,8 +62,8 @@ static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t g)
   
   if (DATA(x) == NULL)
   {
-    fprintf(stderr, "ERROR: malloc failed\n");
-    exit(-1);
+    fprintf(stderr, ERROR_MALLOC_STRING);
+    exit(EXIT_ERROR_MALLOC);
   }
   
   #undef DATA

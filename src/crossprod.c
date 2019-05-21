@@ -1,3 +1,4 @@
+#include "errors.h"
 #include "dmat.h"
 #include "grid.h"
 #include "printer.h"
@@ -37,5 +38,5 @@ int main()
   dmat_free(&c);
   grid_finalize(&g);
   
-  return 0;
+  return EXIT_OK;
 }

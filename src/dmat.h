@@ -93,6 +93,32 @@ static inline void dmat_fill_rand(dmat_t *x)
 
 
 
+// DATA(y) := DATA(x)
+static inline void dmat_copy(dmat_t *x, dmat_t *y)
+{
+  #define DATA(x) (x->data)
+  #define LOCM(x) (x->m_local)
+  #define LOCN(x) (x->n_local)
+  
+  if (x->m != y->m || x->n != y->n || x->mb != y->mb || x->nb != y->nb || x->desc[1] != y->desc[1] || x->g != y->g)
+    MPI_error(x->g, EXIT_ERROR_NONCONFORMABLE, ERROR_NONCONFORMABLE_STRING);
+  
+  for (int j=0; j<LOCN(x); j++)
+  {
+    for (int i=0; i<LOCM(x); i++)
+    {
+      int ind = i + LOCM(x)*j;
+      DATA(x)[ind] = DATA(y)[ind];
+    }
+  }
+  
+  #undef DATA
+  #undef LOCM
+  #undef LOCN
+}
+
+
+
 static inline void dmat_free(dmat_t *x)
 {
   free(x->data);

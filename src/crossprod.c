@@ -17,7 +17,7 @@ int main()
   int m = (NUM_GPUS * GB_PER_GPU) * (BYTES_PER_VALUE / n);
   int mb = BLOCKSIZE, nb = BLOCKSIZE;
   
-  grid_init(&g);
+  grid_init(&g, GRID_TYPE);
   
   dmat_init(&x, m, n, mb, nb, g);
   dmat_init(&c, n, n, mb, nb, g);

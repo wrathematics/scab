@@ -1,8 +1,6 @@
-#include <mpi.h>
-#include <stdio.h>
-
 #include "dmat.h"
 #include "grid.h"
+#include "printer.h"
 #include "prod.h"
 #include "setup.h"
 #include "timer.h"
@@ -32,11 +30,7 @@ int main()
   crossprod(1.0, &x, &c);
   double t_op = get_time(t0);
   
-  if (g.myrow == 0 && g.mycol == 0)
-  {
-    // printf("Compute time: %.3f\n", t1-t0);
-    printf("crossprod,%d,%d,%d,%d,%d,%d,%d,%f,%f\n", 1, g.nprow, g.npcol, m, n, mb, nb, t_gen, t_op);
-  }
+  MPI_print(&g, "crossprod,%d,%d,%d,%d,%d,%d,%d,%f,%f\n", 1, g.nprow, g.npcol, m, n, mb, nb, t_gen, t_op);
   
   dmat_free(&x);
   dmat_free(&c);

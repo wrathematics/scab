@@ -2,6 +2,8 @@
 #define DMAT_H
 
 
+#include <string.h>
+
 #include "errors.h"
 #include "rand.h"
 #include "types.h"
@@ -94,6 +96,13 @@ static inline void dmat_fill_rand(dmat_t *x, int seed)
   #undef DATA
   #undef LOCM
   #undef LOCN
+}
+
+
+
+static inline void dmat_fill_zero(dmat_t *x)
+{
+  memset(x->data, 0, x->m_local*x->n_local*sizeof(*(x->data)));
 }
 
 

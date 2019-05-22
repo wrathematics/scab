@@ -52,8 +52,10 @@ static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t *g)
   LOCM(x) = numroc(m, mb, g->myrow, 0, g->nprow);
   LOCN(x) = numroc(n, nb, g->myrow, 0, g->npcol);
   
-  DATA(x) = malloc(LOCM(x)*LOCN(x) * sizeof(*DATA(x)));
+  x->mb = mb;
+  x->nb = nb;
   
+  DATA(x) = malloc(LOCM(x)*LOCN(x) * sizeof(*DATA(x)));
   if (DATA(x) == NULL)
     MPI_error(g, EXIT_ERROR_MALLOC, ERROR_MALLOC_STRING);
   

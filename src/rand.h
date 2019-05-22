@@ -3,14 +3,11 @@
 
 
 #include <stdlib.h>
-#include <sys/types.h>
-#include <time.h>
-#include <unistd.h>
 
 
 static inline void rand_init(int seed)
 {
-  srandom(seed ^ getpid());
+  srandom(seed);
 }
 
 

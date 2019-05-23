@@ -44,25 +44,22 @@ static inline int numroc(int n, int nb, int iproc, int isrcproc, int nprocs)
 
 static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t *g)
 {
-  #define DATA(x) (x->data)
-  #define LOCM(x) (x->m_local)
-  #define LOCN(x) (x->n_local)
+  int m_local = numroc(m, mb, g->myrow, 0, g->nprow);
+  int n_local = numroc(n, nb, g->myrow, 0, g->npcol);
+  
+  double *data = malloc(m_local*n_local * sizeof(*data));
+  if (data == NULL)
+    MPI_error(g, EXIT_ERROR_MALLOC, ERROR_MALLOC_STRING);
+  
+  descinit(x->desc, g->ictxt, m, n, mb, nb, m_local);
   
   x->m = m;
   x->n = n;
-  
-  LOCM(x) = numroc(m, mb, g->myrow, 0, g->nprow);
-  LOCN(x) = numroc(n, nb, g->myrow, 0, g->npcol);
-  
+  x->m_local = m_local;
+  x->n_local = n_local;
   x->mb = mb;
   x->nb = nb;
-  
-  DATA(x) = malloc(LOCM(x)*LOCN(x) * sizeof(*DATA(x)));
-  if (DATA(x) == NULL)
-    MPI_error(g, EXIT_ERROR_MALLOC, ERROR_MALLOC_STRING);
-  
-  descinit(x->desc, g->ictxt, m, n, mb, nb, x->m_local);
-  
+  x->data = data;
   x->g = g;
   
   #undef DATA

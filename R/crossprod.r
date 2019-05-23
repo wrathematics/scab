@@ -1,7 +1,7 @@
 suppressMessages(library(pbdDMAT))
-init.grid(quiet=TRUE)
-comm.set.seed(1234, diff=TRUE)
 source("setup.r")
+init.grid(quiet=TRUE)
+comm.set.seed(SEED, diff=TRUE)
 
 n = 250
 m = as.integer((NUM_GPUS * GB_PER_GPU) * (BYTES_PER_VALUE / n))

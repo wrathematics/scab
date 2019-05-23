@@ -45,7 +45,7 @@ static inline int numroc(int n, int nb, int iproc, int isrcproc, int nprocs)
 static inline void dmat_init(dmat_t *x, int m, int n, int mb, int nb, grid_t *g)
 {
   int m_local = numroc(m, mb, g->myrow, 0, g->nprow);
-  int n_local = numroc(n, nb, g->myrow, 0, g->npcol);
+  int n_local = numroc(n, nb, g->mycol, 0, g->npcol);
   
   double *data = malloc(m_local*n_local * sizeof(*data));
   if (data == NULL)

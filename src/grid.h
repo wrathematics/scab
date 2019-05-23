@@ -22,11 +22,12 @@ static inline void grid_init(grid_t *g, int gridtype)
 {
   char order = 'R';
   int size;
+  int ictxt;
   
   MPI_Init(NULL, NULL);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   
-  Cblacs_get(-1, 0, &(g->ictxt));
+  Cblacs_get(-1, 0, &ictxt);
   
   if (gridtype == PROC_GRID_SQUARE)
   {
@@ -44,19 +45,20 @@ static inline void grid_init(grid_t *g, int gridtype)
     
     nr = size / nc;
     
-    Cblacs_gridinit(&(g->ictxt), &order, nr, nc);
+    Cblacs_gridinit(&ictxt, &order, nr, nc);
   }
   else if (gridtype == PROC_GRID_TALL)
-    Cblacs_gridinit(&(g->ictxt), &order, size, 1);
+    Cblacs_gridinit(&ictxt, &order, size, 1);
   else if (gridtype == PROC_GRID_WIDE)
-    Cblacs_gridinit(&(g->ictxt), &order, 1, size);
+    Cblacs_gridinit(&ictxt, &order, 1, size);
   else
   {
     fprintf(stderr, "ERROR: impossible grid type");
     exit(-1);
   }
   
-  Cblacs_gridinfo(g->ictxt, &(g->nprow), &(g->npcol), &(g->myrow), &(g->mycol));
+  Cblacs_gridinfo(ictxt, &(g->nprow), &(g->npcol), &(g->myrow), &(g->mycol));
+  g->ictxt = ictxt;
   g->size = size;
 }
 
@@ -64,8 +66,9 @@ static inline void grid_init(grid_t *g, int gridtype)
 
 static inline void grid_finalize(grid_t *g)
 {
+  int mpi_continue = 0;
   Cblacs_gridexit(g->ictxt);
-  Cblacs_exit(0);
+  Cblacs_exit(mpi_continue);
 }
 
 

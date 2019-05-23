@@ -53,8 +53,12 @@ static inline void grid_init(grid_t *g, int gridtype)
     Cblacs_gridinit(&ictxt, &order, 1, size);
   else
   {
-    fprintf(stderr, "ERROR: impossible grid type");
-    exit(-1);
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    if (rank == 0)
+      fprintf(stderr, ERROR_BLACSGRID_STRING);
+    
+    exit(EXIT_ERROR_BLACSGRID);
   }
   
   Cblacs_gridinfo(ictxt, &(g->nprow), &(g->npcol), &(g->myrow), &(g->mycol));

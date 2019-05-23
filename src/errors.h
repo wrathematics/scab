@@ -21,6 +21,10 @@
 #define EXIT_ERROR_SCALAPACK -3
 #define ERROR_SCALAPACK_STRING "ERROR: ScaLAPACK function %s failed with info=%d"
 
+#define EXIT_ERROR_BLACSGRID -4
+#define ERROR_BLACSGRID_STRING "ERROR: impossible grid type"
+
+
 
 static inline void MPI_error(grid_t *g, int code, const char *fmt, ...)
 {

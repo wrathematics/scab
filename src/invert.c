@@ -10,7 +10,7 @@
 
 
 // other parameters defined in setup.h
-#define GRID_TYPE PROC_GRID_TALL
+#define GRID_TYPE PROC_GRID_SQUARE
 
 int main()
 {

@@ -22,7 +22,7 @@ extern void pdsyrk_(char *uplo, char *trans, int *n, int *k, double *alpha, doub
 
 
 
-// x^t * x
+// x^t * x via gemm
 static inline void crossprod_gemm(double alpha, dmat_t *x, dmat_t *c)
 {
   char trans_t = 'T';
@@ -51,7 +51,7 @@ static inline void make_symmetric(dmat_t *x)
   int n_local = x->n_local;
   
   if (m != n)
-  MPI_error(x->g, EXIT_ERROR_NONCONFORMABLE, ERROR_NONCONFORMABLE_STRING);
+    MPI_error(x->g, EXIT_ERROR_NONCONFORMABLE, ERROR_NONCONFORMABLE_STRING);
   
   int nprow = x->g->nprow;
   int npcol = x->g->npcol;
@@ -89,7 +89,9 @@ static inline void make_symmetric(dmat_t *x)
   #undef INDXL2G
 }
 
-// base/src/base/linalg/pcrossprod.f90
+
+
+// x^t * x via syrk
 static inline void crossprod(double alpha, dmat_t *x, dmat_t *c)
 {
   char trans = 'T';

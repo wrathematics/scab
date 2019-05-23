@@ -9,7 +9,8 @@
 #include "types.h"
 
 
-// parameters defined in setup.h
+// other parameters defined in setup.h
+#define GRID_TYPE PROC_GRID_SQUARE
 
 int main()
 {

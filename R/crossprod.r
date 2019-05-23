@@ -6,8 +6,9 @@ source("setup.r")
 n = 250
 m = as.integer((NUM_GPUS * GB_PER_GPU) * (BYTES_PER_VALUE / n))
 
-.pbd_env$BLDIM = c(BLOCKSIZE, BLOCKSIZE)
+GRID_TYPE = PROC_GRID_TALL
 .pbd_env$ICTXT = GRID_TYPE
+.pbd_env$BLDIM = c(BLOCKSIZE, BLOCKSIZE)
 g = base.blacs(GRID_TYPE)
 
 t_gen = mpitime(x <- ddmatrix("runif", m, n))

@@ -33,7 +33,7 @@ static inline void grid_init(grid_t *g, int gridtype)
   {
     int nr, nc;
     int n = (int) sqrt((double) size);
-    n = (n<1)?1:n;
+    n = (n<1)?1:n; // suppresses bogus compiler warning
     
     for (int i=0; i<n; i++)
     {

@@ -18,12 +18,12 @@ extern void pdgetri_(int *n, double *a, int *ia, int *ja, int *desca, int *ipiv,
 
 static inline void invert(dmat_t *x)
 {
-  int info;
+  int info = 0;
+  int ij = 1;
   
   int n = x->n;
   int nb = x->nb;
   
-  int ij = 1;
   
   // factor X = LU
   int *ipiv = malloc((n + nb) * sizeof(*ipiv));

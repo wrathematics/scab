@@ -18,6 +18,9 @@
 #define EXIT_ERROR_NONCONFORMABLE -2
 #define ERROR_NONCONFORMABLE_STRING "ERROR: operation on non-conformable arrays"
 
+#define EXIT_ERROR_SCALAPACK -3
+#define ERROR_SCALAPACK_STRING "ERROR: ScaLAPACK function %s failed with info=%d"
+
 
 static inline void MPI_error(grid_t *g, int code, const char *fmt, ...)
 {

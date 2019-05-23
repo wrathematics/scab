@@ -4,6 +4,7 @@
 
 #include <mpi.h>
 
+
 static inline double get_time(double start)
 {
   double t = MPI_Wtime() - start;

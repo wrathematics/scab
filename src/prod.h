@@ -8,14 +8,15 @@
 #include "errors.h"
 #include "types.h"
 
-void pdgemm_(char *transa, char *transb, int *m, int *n, int *k, double *alpha, 
+
+extern void pdgemm_(char *transa, char *transb, int *m, int *n, int *k, double *alpha, 
   double *a, int *ia, int *ja, int *desca, double *b, int *ib, int *jb, 
   int *descb, double *beta, double *c, int *ic, int *jc, int *descc);
 
-void pdgeadd_(char *trans, int *m, int *n, double *alpha, double *a, int *ia,
+extern void pdgeadd_(char *trans, int *m, int *n, double *alpha, double *a, int *ia,
   int *ja, int *desca, double *beta, double *c, int *ic, int *jf, int *descc);
 
-void pdsyrk_(char *uplo, char *trans, int *n, int *k, double *alpha, double *a,
+extern void pdsyrk_(char *uplo, char *trans, int *n, int *k, double *alpha, double *a,
   int *ia, int *ja, int *desca, double *beta, double *c, int *ic, int *jc,
   int *descc);
 

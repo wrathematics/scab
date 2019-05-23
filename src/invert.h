@@ -8,11 +8,12 @@
 #include "types.h"
 
 
-void pdgetrf_(int *m, int *n, double *a, int *ia, int *ja, int *desca,
+extern void pdgetrf_(int *m, int *n, double *a, int *ia, int *ja, int *desca,
   int *ipiv, int *info);
 
-void pdgetri_(int *n, double *a, int *ia, int *ja, int *desca, int *ipiv,
+extern void pdgetri_(int *n, double *a, int *ia, int *ja, int *desca, int *ipiv,
   double *work, int *lwork, int *iwork, int *liwork, int *info);
+
 
 
 static inline void invert(dmat_t *x)

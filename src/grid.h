@@ -10,11 +10,12 @@
 #define PROC_GRID_TALL    2
 
 
-void Cblacs_exit(int NotDone);
-void Cblacs_get(int ictxt, int what, int *val);
-void Cblacs_gridexit(int Contxt);
-void Cblacs_gridinfo(int ConTxt, int *nprow, int *npcol, int *myrow, int *mycol);
-void Cblacs_gridinit(int *ConTxt, char *order, int nprow, int npcol);
+extern void Cblacs_exit(int NotDone);
+extern void Cblacs_get(int ictxt, int what, int *val);
+extern void Cblacs_gridexit(int Contxt);
+extern void Cblacs_gridinfo(int ConTxt, int *nprow, int *npcol, int *myrow, int *mycol);
+extern void Cblacs_gridinit(int *ConTxt, char *order, int nprow, int npcol);
+
 
 
 static inline void grid_init(grid_t *g, int gridtype)
